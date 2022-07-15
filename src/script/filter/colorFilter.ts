@@ -29,6 +29,25 @@ export class ColorFilter implements IFilter {
         }
     }
 
+    addFilterEventListener(additionalHandler: () => void): void {
+        document.querySelectorAll('.color__btn').forEach((label) =>
+            label.addEventListener('click', () => {
+                if ((label as HTMLElement).classList.contains('active')) {
+                    (label as HTMLElement).classList.remove('active');
+                    for (const key of this.color.keys()) {
+                        if (label.classList.contains(key)) this.color.set(key, false);
+                    }
+                } else {
+                    (label as HTMLElement).classList.add('active');
+                    for (const key of this.color.keys()) {
+                        if (label.classList.contains(key)) this.color.set(key, true);
+                    }
+                }
+                additionalHandler();
+            })
+        );
+    }
+
     private colorArrayMaker(color: Map<string, boolean>) {
         const colorFiltered: Array<string> = [];
         color.forEach((value, key) => {

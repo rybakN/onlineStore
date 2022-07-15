@@ -2,7 +2,13 @@ import { IFilter } from '../../type/IFilter';
 import { IProduct } from '../../type/productList';
 
 export class MakerFilter implements IFilter {
-    maker = new Maker();
+    maker: Map<string, boolean>;
+    constructor() {
+        this.maker = new Map();
+        this.maker.set('xiaomi', false);
+        this.maker.set('samsung', false);
+        this.maker.set('apple', false);
+    }
     filtered(productList: Array<IProduct>): Array<IProduct> {
         let key: number;
         const filteredProductList = [];
@@ -18,22 +24,37 @@ export class MakerFilter implements IFilter {
     }
 
     resetToDefault(): void {
-        this.maker = new Maker();
+        for (const key of this.maker.keys()) {
+            this.maker.set(key, false);
+        }
     }
 
-    private makerArrayMaker(maker: Maker) {
+    addFilterEventListener(additionalHandler: () => void): void {
+        document.querySelectorAll('.maker__btn').forEach((label) =>
+            label.addEventListener('click', () => {
+                if ((label as HTMLElement).classList.contains('active')) {
+                    (label as HTMLElement).classList.remove('active');
+                    for (const key of this.maker.keys()) {
+                        if (label.classList.contains(key)) this.maker.set(key, false);
+                    }
+                } else {
+                    (label as HTMLElement).classList.add('active');
+                    for (const key of this.maker.keys()) {
+                        if (label.classList.contains(key)) this.maker.set(key, true);
+                    }
+                }
+                additionalHandler();
+            })
+        );
+    }
+
+    private makerArrayMaker(maker: Map<string, boolean>) {
         const makerFiltered: Array<string> = [];
-        for (const key in maker) {
-            if (maker[key] === true) {
+        maker.forEach((value, key) => {
+            if (value === true) {
                 makerFiltered.push(key);
             }
-        }
+        });
         return makerFiltered;
     }
-}
-
-class Maker {
-    xiaomi = false;
-    samsung = false;
-    apple = false;
 }

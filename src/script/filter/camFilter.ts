@@ -28,6 +28,25 @@ export class CamFilter implements IFilter {
         }
     }
 
+    addFilterEventListener(additionalHandler: () => void): void {
+        document.querySelectorAll('.cam__btn').forEach((label) =>
+            label.addEventListener('click', () => {
+                if ((label as HTMLElement).classList.contains('active')) {
+                    (label as HTMLElement).classList.remove('active');
+                    for (const key of this.cam.keys()) {
+                        if (label.classList.contains(key)) this.cam.set(key, false);
+                    }
+                } else {
+                    (label as HTMLElement).classList.add('active');
+                    for (const key of this.cam.keys()) {
+                        if (label.classList.contains(key)) this.cam.set(key, true);
+                    }
+                }
+                additionalHandler();
+            })
+        );
+    }
+
     private camArrayMaker(cam: Map<string, boolean>) {
         const camFiltered: Array<string> = [];
         cam.forEach((value, key) => {

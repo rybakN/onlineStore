@@ -8,8 +8,7 @@ export const nonLinearStepSlider = document.getElementById('slider-non-linear-st
 export const snapSlider = document.getElementById('slider-snap');
 
 export function slider1() {
-
-    noUiSlider.create(nonLinearStepSlider, {
+    noUiSlider.create(<HTMLElement>nonLinearStepSlider, {
         start: [2000, 2022],
         step: 1,
         range: {
@@ -19,8 +18,8 @@ export function slider1() {
         },
     });
     const nonLinearStepSliderValueElement = document.getElementById('slider-non-linear-step-value');
-    nonLinearStepSlider.noUiSlider.on('update', function (values) {
-        nonLinearStepSliderValueElement.innerHTML = values.join(' - ');
+    (nonLinearStepSlider as HTMLElement).noUiSlider.on('update', function (values) {
+        (nonLinearStepSliderValueElement as HTMLElement).innerHTML = values.join(' - ');
     });
 }
 
