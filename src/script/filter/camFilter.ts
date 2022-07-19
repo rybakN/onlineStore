@@ -26,6 +26,7 @@ export class CamFilter implements IFilter {
         for (const key of this.cam.keys()) {
             this.cam.set(key, false);
         }
+        this.saveToLocalStorage();
     }
 
     addFilterEventListener(additionalHandler: () => void): void {
@@ -42,9 +43,25 @@ export class CamFilter implements IFilter {
                         if (label.classList.contains(key)) this.cam.set(key, true);
                     }
                 }
+                this.saveToLocalStorage();
                 additionalHandler();
             })
         );
+    }
+
+    getOptionsFromLocalStorage(productList: Array<IProduct>): Array<IProduct> {
+        for (const key of this.cam.keys()) {
+            if (localStorage.getItem(key) === null) {
+                this.cam.set(key, false);
+            } else {
+                this.cam.set(key, JSON.parse(localStorage.getItem(key) as string));
+                if (JSON.parse(localStorage.getItem(key) as string) === true) {
+                    document.querySelector('.' + key)?.classList.add('active');
+                }
+            }
+        }
+        const filteredProductList: Array<IProduct> = this.filtered(productList);
+        return filteredProductList;
     }
 
     private camArrayMaker(cam: Map<string, boolean>) {
@@ -55,5 +72,11 @@ export class CamFilter implements IFilter {
             }
         });
         return camFiltered;
+    }
+
+    private saveToLocalStorage(): void {
+        for (const key of this.cam.keys()) {
+            localStorage.setItem(key, JSON.stringify(this.cam.get(key)));
+        }
     }
 }

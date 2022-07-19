@@ -4,6 +4,7 @@ import { IProduct } from '../../type/productList';
 export class YearAccedingSort implements ISort {
     static sortName = 'yearAccedingSort';
     sort(productList: Array<IProduct>): Array<IProduct> {
+        localStorage.setItem('sortName', 'yearAccedingSort');
         return productList.sort(this.compare);
     }
 

@@ -14,7 +14,6 @@ import { MakerFilter } from './makerFilter';
 import { PopularFilter } from './popularFilter';
 import { RangeQuantityFilter } from './rangeQuantityFilter';
 import { RangeYearsFilter } from './rangeYearsFilter';
-const select = document.querySelector('.sort__select');
 
 export class FilterCombiner implements IFiltered {
     arrayFilters: Array<IFilter> = [];
@@ -32,19 +31,43 @@ export class FilterCombiner implements IFiltered {
         this.arrayFilters.push(new RangeQuantityFilter());
         this.arrayFilters.push(new SearchTool());
     }
-    filtered(filters: Array<IFilter>, productList: Array<IProduct>): Array<IProduct> {
-        filters.forEach((filter) => {
+
+    addFiltersEventListener(view: IView, productList: Array<IProduct>): void {
+        window.onload = () => {
+            const loaded = localStorage.getItem('loaded');
+            if (loaded) {
+                this.loadFromLocalStorage(<IView>view, <Array<IProduct>>productList, <HTMLElement>selectedSort);
+            } else {
+                localStorage.setItem('loaded', 'true');
+            }
+        };
+
+        const selectedSort = document.querySelector('.sort__select');
+        this.arrayFilters.forEach((filter) => {
+            filter.addFilterEventListener(() => {
+                const filteredProductList = this.filter(productList);
+                this.addSortEventListener(<IView>view, <Array<IProduct>>filteredProductList, <HTMLElement>selectedSort);
+                view.drawCard(filteredProductList);
+            });
+        });
+        this.addSortEventListener(<IView>view, <Array<IProduct>>productList, <HTMLElement>selectedSort);
+        this.addResetEventListener(<IView>view, <Array<IProduct>>productList, <HTMLElement>selectedSort);
+        this.addResetLocalStorageEventListener(<IView>view, <Array<IProduct>>productList);
+    }
+
+    private filter(productList: Array<IProduct>): Array<IProduct> {
+        this.arrayFilters.forEach((filter) => {
             productList = filter.filtered(productList);
         });
         return productList;
     }
 
-    resetToDefault(view: IView, productList: Array<IProduct>): void {
+    private addResetEventListener(view: IView, productList: Array<IProduct>, selectedSort: HTMLElement): void {
         (document.querySelector('.reset') as HTMLElement).addEventListener('click', () => {
             this.arrayFilters.forEach((filter) => {
                 filter.resetToDefault();
             });
-            const sortName = (select as HTMLElement).value;
+            const sortName = (selectedSort as HTMLInputElement).value;
             const sort = this.sorts.get(sortName);
             sort?.sort(productList);
             view.drawCard(productList);
@@ -54,27 +77,42 @@ export class FilterCombiner implements IFiltered {
         });
     }
 
-    addFiltersEventListener(view: IView, productList: Array<IProduct>): void {
-        this.arrayFilters.forEach((filter) => {
-            filter.addFilterEventListener(() => {
-                const filteredProductList = this.filter(productList);
-                view.drawCard(filteredProductList);
+    private addResetLocalStorageEventListener(view: IView, productList: Array<IProduct>): void {
+        (document.querySelector('.reset-LS') as HTMLElement).addEventListener('click', () => {
+            localStorage.clear();
+            location.reload();
+            view.drawCard(productList);
+            document.querySelectorAll('.active').forEach((elem) => {
+                elem.classList.remove('active');
             });
         });
+    }
 
-        (select as HTMLElement).addEventListener('change', () => {
-            const sortName = (select as Element).value;
-            const sort = this.sorts.get(sortName);
-            const filteredProductList = this.filter(productList);
+    private addSortEventListener(view: IView, productList: Array<IProduct>, selectedSort: HTMLElement): void {
+        (selectedSort as HTMLElement).addEventListener('change', () => {
+            const sortName: string = (selectedSort as HTMLInputElement).value;
+            const sort: ISort | undefined = this.sorts.get(sortName);
+            const filteredProductList: Array<IProduct> = this.filter(productList);
             sort?.sort(filteredProductList);
             view.drawCard(filteredProductList);
         });
     }
 
-    private filter(productList: Array<IProduct>): Array<IProduct> {
+    private getFilterLS(productList: Array<IProduct>): Array<IProduct> {
         this.arrayFilters.forEach((filter) => {
-            productList = filter.filtered(productList);
+            productList = filter.getOptionsFromLocalStorage(productList);
         });
         return productList;
+    }
+
+    private loadFromLocalStorage(view: IView, productList: Array<IProduct>, selectedSort: HTMLElement): void {
+        const filteredProductList = this.getFilterLS(productList);
+        const sortName: string | null = localStorage.getItem('sortName');
+        if (sortName != null) {
+            (selectedSort as HTMLInputElement).value = sortName;
+        }
+        const sort = this.sorts.get(<string>sortName);
+        sort?.sort(filteredProductList);
+        view.drawCard(filteredProductList);
     }
 }

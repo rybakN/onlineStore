@@ -4,41 +4,46 @@ import { IApp } from './type/IApp';
 import * as noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 
-export const nonLinearStepSlider = document.getElementById('slider-non-linear-step');
-export const snapSlider = document.getElementById('slider-snap');
+export const nonLinearStepSlider: HTMLElement | null = document.getElementById('slider-non-linear-step');
+export const snapSlider: HTMLElement | null = document.getElementById('slider-snap');
+const nonLinearStepSliderValueElement: HTMLElement | null = document.getElementById('slider-non-linear-step-value');
+const snapValues: Array<HTMLElement | null> = [
+    document.getElementById('slider-snap-value-lower'),
+    document.getElementById('slider-snap-value-upper'),
+];
 
-export function slider1() {
-    noUiSlider.create(<HTMLElement>nonLinearStepSlider, {
+function slider1(): void {
+    noUiSlider.create(<noUiSlider.target>nonLinearStepSlider, {
         start: [2000, 2022],
         step: 1,
         range: {
-            'min': [2000],
-
-            'max': [2022],
+            min: [2000],
+            max: [2022],
         },
     });
-    const nonLinearStepSliderValueElement = document.getElementById('slider-non-linear-step-value');
-    (nonLinearStepSlider as HTMLElement).noUiSlider.on('update', function (values) {
-        (nonLinearStepSliderValueElement as HTMLElement).innerHTML = values.join(' - ');
-    });
+    (nonLinearStepSlider as noUiSlider.target).noUiSlider?.on(
+        'update',
+        function (values: Array<string | number>): void {
+            (nonLinearStepSliderValueElement as noUiSlider.target).innerHTML = values.join(' - ');
+        }
+    );
 }
 
-export function slider2() {
-    noUiSlider.create(snapSlider, {
+function slider2(): void {
+    noUiSlider.create(<noUiSlider.target>snapSlider, {
         start: [1, 20],
         step: 1,
         range: {
-            'min': 1,
-            'max': 20,
+            min: 1,
+            max: 20,
         },
     });
-    const snapValues = [
-        document.getElementById('slider-snap-value-lower'),
-        document.getElementById('slider-snap-value-upper')
-    ];
-    snapSlider.noUiSlider.on('update', function (values, handle) {
-        snapValues[handle].innerHTML = values[handle];
-    });
+    (snapSlider as noUiSlider.target).noUiSlider?.on(
+        'update',
+        function (values: Array<string | number>, handle: number): void {
+            (snapValues[handle] as HTMLElement).innerHTML = <string>values[handle];
+        }
+    );
 }
 
 slider1();
@@ -47,3 +52,45 @@ slider2();
 const app: IApp = new App();
 
 app.start();
+
+const score = `Критерии оценки cross-check: 188 / 200
+- [x] Главная страница содержит все товары магазина а также фильтры, строку поиска, поле для сортировки. Выполняются требования к вёрстке. +5
+- [x] Карточка товара содержит его изображение, название, количество данного товара на складе, год выхода на рынок, цвет, производитель и т.д., находится ли товар в корзине. Нет указания находится ли товар в корзине. +5
+
+- [ ] Добавление товаров в корзину 
+    - [ ] кликая по карточке с товаром или по кнопке на нем, товар можно добавлять в корзину или удалять. Карточки 
+добавленных в корзину товаров внешне отличаются от остальных 
+    - [ ] на странице отображается количество добавленных в корзину товаров. При попытке добавить в корзину больше 20 товаров, выводится всплывающее уведомление с текстом "Извините, все слоты заполнены"
+- [x] Сортировка +20
+    - [x] Сортируются только те товары, которые в данный момент отображаются на странице
+сортировка товаров по названию в возрастающем и убывающем порядке +10
+    - [x] сортировка товаров по году их выхода на рынок в возрастающем и убывающем порядке +10
+- [x] Фильтры в указанном диапазоне от и до +30
+    - [x] фильтры по количеству +10
+    - [x] фильтры по году выпуска на рынок +10
+    - [x] для фильтрации в указанном диапазоне используется range slider с двумя ползунками. При перемещении ползунков отображается их текущее значение, разный цвет слайдера до и после ползунка +10
+- [x] Фильтры по значению +30
+    Выбранные фильтры выделяются стилем.
+    - [x] фильтры по производителю +5
+    - [x] фильтры по цвету +5
+    - [x] фильтры по размеру (в случае с Демо - по количеству камер) +5
+    - [x] можно отобразить только популярные товары +5
+    - [x] можно отфильтровать товары по нескольким фильтрам одного типа +10
+- [x] Можно отфильтровать товары по нескольким фильтрам разного типа +20
+    - [x] Для нескольких фильтров разного типа отображаются только те товары, которые соответствуют всем выбранным фильтрам.
+    - [x] Например, можно отобразить только красные товары. Или популярные белые и красные товары впоступившие на рынок в 2010-2020 годах.
+    - [x] Если товаров, соответствующих всем выбранным фильтрам нет, на странице выводится уведомление в человекочитаемом формате, например, "Извините, совпадений не обнаружено"
+- [x] Сброс фильтров +20
+    - [x] есть кнопка reset для сброса фильтров +10
+    - [x] Кнопка reset сбрасывает только фильтры, не влияя на порядок сортировки или товары, добавленные в избранное. После использования кнопки reset фильтры остаются работоспособными при сбросе фильтров кнопкой reset, ползунки range slider сдвигаются к краям, значения ползунков возвращаются к первоначальным, range slider закрашивается одним цветом +10
+- [x] Сохранение настроек в local storage +30
+    - [x] выбранные пользователем фильтры, порядок сортировки, добавленные в избранное товары сохраняются при перезагрузке страницы. Есть кнопка сброса настроек, которая очищает local storage +10
+- [x] Поиск +30
+    - [x] при открытии приложения курсор находится в поле поиска +2
+    - [x] автозаполнение поля поиска отключено (нет выпадающего списка с предыдущими запросами) +2
+    - [x] есть placeholder +2
+    - [ ] в поле поиска есть крестик, позволяющий очистить поле поиска
+    - [x] если нет совпадения последовательности букв в поисковом запросе с названием товара, выводится уведомление в человекочитаемом формате, например "Извините, совпадений не обнаружено" +2
+    - [x] при вводе поискового запроса на странице остаются только те товары, в которых есть указанные в поиске буквы в указанном порядке. При этом не обязательно, чтобы буквы были в начале слова. Регистр символов при поиске не учитывается +10
+    - [x] Поиск ведётся только среди товаров, которые в данный момент отображаются на странице. Если очистить поле поиска, на странице отображаются товары, соответствующие всем выбранным фильтрам и настройкам сортировки +10`;
+console.log(score);

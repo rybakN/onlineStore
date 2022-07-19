@@ -27,6 +27,7 @@ export class ColorFilter implements IFilter {
         for (const key of this.color.keys()) {
             this.color.set(key, false);
         }
+        this.saveToLocalStorage();
     }
 
     addFilterEventListener(additionalHandler: () => void): void {
@@ -44,8 +45,22 @@ export class ColorFilter implements IFilter {
                     }
                 }
                 additionalHandler();
+                this.saveToLocalStorage();
             })
         );
+    }
+
+    getOptionsFromLocalStorage(productList: Array<IProduct>): Array<IProduct> {
+        for (const key of this.color.keys()) {
+            if (localStorage.getItem(key) != null) {
+                this.color.set(key, JSON.parse(localStorage.getItem(key) as string));
+                if (JSON.parse(localStorage.getItem(key) as string) === true) {
+                    document.querySelector('.' + key)?.classList.add('active');
+                }
+            }
+        }
+        const filteredProductList: Array<IProduct> = this.filtered(productList);
+        return filteredProductList;
     }
 
     private colorArrayMaker(color: Map<string, boolean>) {
@@ -56,5 +71,11 @@ export class ColorFilter implements IFilter {
             }
         });
         return colorFiltered;
+    }
+
+    private saveToLocalStorage(): void {
+        for (const key of this.color.keys()) {
+            localStorage.setItem(key, JSON.stringify(this.color.get(key)));
+        }
     }
 }

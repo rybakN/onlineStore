@@ -25,6 +25,7 @@ export class PopularFilter implements IFilter {
 
     resetToDefault(): void {
         this.popular.set('popular', false);
+        this.saveToLocalStorage();
     }
 
     addFilterEventListener(additionalHandler: () => void): void {
@@ -42,7 +43,28 @@ export class PopularFilter implements IFilter {
                     }
                 }
                 additionalHandler();
+                this.saveToLocalStorage();
             })
         );
+    }
+    private saveToLocalStorage(): void {
+        for (const key of this.popular.keys()) {
+            localStorage.setItem(key, JSON.stringify(this.popular.get(key)));
+        }
+    }
+
+    getOptionsFromLocalStorage(productList: Array<IProduct>): Array<IProduct> {
+        for (const key of this.popular.keys()) {
+            if (localStorage.getItem(key) === null) {
+                this.popular.set(key, false);
+            } else {
+                this.popular.set(key, JSON.parse(localStorage.getItem(key) as string));
+                if (JSON.parse(localStorage.getItem(key) as string) === true) {
+                    document.querySelector('.' + key)?.classList.add('active');
+                }
+            }
+        }
+        const filteredProductList: Array<IProduct> = this.filtered(productList);
+        return filteredProductList;
     }
 }

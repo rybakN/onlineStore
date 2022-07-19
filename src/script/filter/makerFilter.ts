@@ -27,6 +27,7 @@ export class MakerFilter implements IFilter {
         for (const key of this.maker.keys()) {
             this.maker.set(key, false);
         }
+        this.saveToLocalStorage();
     }
 
     addFilterEventListener(additionalHandler: () => void): void {
@@ -44,8 +45,24 @@ export class MakerFilter implements IFilter {
                     }
                 }
                 additionalHandler();
+                this.saveToLocalStorage();
             })
         );
+    }
+
+    getOptionsFromLocalStorage(productList: Array<IProduct>): Array<IProduct> {
+        for (const key of this.maker.keys()) {
+            if (localStorage.getItem(key) === null) {
+                this.maker.set(key, false);
+            } else {
+                this.maker.set(key, JSON.parse(localStorage.getItem(key) as string));
+                if (JSON.parse(localStorage.getItem(key) as string) === true) {
+                    document.querySelector('.' + key)?.classList.add('active');
+                }
+            }
+        }
+        const filteredProductList: Array<IProduct> = this.filtered(productList);
+        return filteredProductList;
     }
 
     private makerArrayMaker(maker: Map<string, boolean>) {
@@ -56,5 +73,11 @@ export class MakerFilter implements IFilter {
             }
         });
         return makerFiltered;
+    }
+
+    private saveToLocalStorage(): void {
+        for (const key of this.maker.keys()) {
+            localStorage.setItem(key, JSON.stringify(this.maker.get(key)));
+        }
     }
 }

@@ -4,6 +4,7 @@ import { IProduct } from '../../type/productList';
 export class AlphabeticAscendingSort implements ISort {
     static sortName = 'alphabeticDescendingSort';
     sort(productList: Array<IProduct>): Array<IProduct> {
+        localStorage.setItem('sortName', 'alphabeticDescendingSort');
         return productList.sort(this.compare);
     }
 

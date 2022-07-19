@@ -39,8 +39,11 @@
 }
 
 .filter__btn {
-  background-color: aqua;
+  background-color: rgb(231, 217, 133);
   margin: 5px;
+}
+.filter__btn:hover {
+  background-color: rgb(226, 208, 43);
 }
 
 .filter__btn.active {

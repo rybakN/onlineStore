@@ -18,9 +18,6 @@ export class App implements IApp {
     start(): void {
         const productList: Array<IProduct> = this.loader.getProducts();
         this.filterCombiner.addFiltersEventListener(this.view, productList);
-        this.filterCombiner.resetToDefault(this.view, productList);
-
-        //productList.then(data => this.view.drawCard(data));
         this.view.drawCard(productList);
     }
 }
