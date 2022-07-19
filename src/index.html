@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Online Store</title>
+    <meta charset = "utf-8">
+  </head>
+  <body class="body">
+
+    <div class="slider slider-year">Год выпуска:
+      <div id="slider-non-linear-step"></div>
+      <div id="slider-non-linear-step-value"></div>
+    </div>
+
+    <div class="slider slider-quantity">Количество на складе:
+      <div id="slider-snap"></div>
+      <div id="slider-snap-value-lower"></div>
+      <div id="slider-snap-value-upper"></div>
+    </div>
+
+    <input type="text" placeholder="введите название" autocomplete="off" autofocus class="search-input">  Поиск
+
+    <div class="sort">Сортировка: 
+      <select class="sort__select" name="select2">
+        <option selected="selected"></option>
+        <option value="yearAccedingSort">По году выпуска по возрастанию</option>
+        <option value="yearDescendingSort">По году выпуска по убыванию</option>
+        <option value="alphabeticAscendingSort">По названию от А до Я</option>
+        <option value="alphabeticDescendingSort">По названию от Я до А</option>
+      </select>
+    </div>
+    
+
+    <div class="color">Цвет:
+      <div class="filter__btn color__btn color__btn green">зеленый</div>
+      <div class="filter__btn color__btn black">black</div>
+      <div class="filter__btn color__btn red">red</div>
+    </div>
+    <div class="cam">Количество камер:
+      <div class="filter__btn cam__btn cam1">1</div>
+      <div class="filter__btn cam__btn cam2">2</div>
+      <div class="filter__btn cam__btn cam3">3</div>
+    </div>
+    <div class="maker">Производитель:
+      <div class="filter__btn maker__btn xiaomi">Xiaomi</div>
+      <div class="filter__btn maker__btn samsung">Samsung</div>
+      <div class="filter__btn maker__btn apple">Apple</div>
+    </div>
+
+    <div class="popular_block">Популярные:
+      <div class="filter__btn popular__btn popular">Press</div>
+    </div>
+
+    <div class="reset_btn">
+      <button class="filter__btn reset">RESET FILTER</button>
+    </div>
+    <div class="reset_btn_LS">
+      <button class="filter__btn reset-LS">RESET Local Storage</button>
+    </div>
+
+    <div class="product">
+      
+      
+    </div>
+
+    <footer class="footer">
+      <div class="footer__logo">RS</div>
+      <div class="footer__name">© Rolling Scopes School, 2022</div>
+    </footer>
+  </body>
+</html>

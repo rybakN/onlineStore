@@ -1,0 +1,254 @@
+[
+  {
+    "name": "Apple iphone 11",
+    "urlImg": "../src/img/product/apple_iphone_11_pro.jpg",
+    "quantity": 138,
+    "startYear": 2020,
+    "maker": "Apple",
+    "color": "green",
+    "camQuant": "2",
+    "popular": true
+  },
+
+  {
+    "name": "Apple iphone 12",
+    "urlImg": "../src/img/product/samsung1.png",
+    "quantity": 1,
+    "startYear": 2021,
+    "maker": "Apple",
+    "color": "black",
+    "camQuant": "3",
+    "popular": false
+  },
+  {
+    "name": "Apple iphone 11",
+    "urlImg": "../src/img/product/apple_iphone_11_pro.jpg",
+    "quantity": 138,
+    "startYear": 2020,
+    "maker": "Apple",
+    "color": "green",
+    "camQuant": "2",
+    "popular": true
+  },
+
+  {
+    "name": "Apple iphone 12",
+    "urlImg": "../src/img/product/samsung1.png",
+    "quantity": 1,
+    "startYear": 2021,
+    "maker": "Apple",
+    "color": "black",
+    "camQuant": "3",
+    "popular": false
+  },
+  {
+    "name": "Apple iphone 11",
+    "urlImg": "../src/img/product/apple_iphone_11_pro.jpg",
+    "quantity": 138,
+    "startYear": 2020,
+    "maker": "Apple",
+    "color": "green",
+    "camQuant": "2",
+    "popular": true
+  },
+
+  {
+    "name": "Apple iphone 12",
+    "urlImg": "../src/img/product/samsung1.png",
+    "quantity": 1,
+    "startYear": 2021,
+    "maker": "Apple",
+    "color": "black",
+    "camQuant": "3",
+    "popular": false
+  },
+  {
+    "name": "Apple iphone 11",
+    "urlImg": "../src/img/product/apple_iphone_11_pro.jpg",
+    "quantity": 138,
+    "startYear": 2020,
+    "maker": "Apple",
+    "color": "green",
+    "camQuant": "2",
+    "popular": true
+  },
+
+  {
+    "name": "Apple iphone 12",
+    "urlImg": "../src/img/product/samsung1.png",
+    "quantity": 1,
+    "startYear": 2021,
+    "maker": "Apple",
+    "color": "black",
+    "camQuant": "3",
+    "popular": false
+  },
+  {
+    "name": "Apple iphone 11",
+    "urlImg": "../src/img/product/apple_iphone_11_pro.jpg",
+    "quantity": 138,
+    "startYear": 2020,
+    "maker": "Apple",
+    "color": "green",
+    "camQuant": "2",
+    "popular": true
+  },
+
+  {
+    "name": "Apple iphone 12",
+    "urlImg": "../src/img/product/samsung1.png",
+    "quantity": 1,
+    "startYear": 2021,
+    "maker": "Apple",
+    "color": "black",
+    "camQuant": "3",
+    "popular": false
+  },
+  {
+    "name": "Apple iphone 11",
+    "urlImg": "../src/img/product/apple_iphone_11_pro.jpg",
+    "quantity": 138,
+    "startYear": 2020,
+    "maker": "Apple",
+    "color": "green",
+    "camQuant": "2",
+    "popular": true
+  },
+
+  {
+    "name": "Apple iphone 12",
+    "urlImg": "../src/img/product/samsung1.png",
+    "quantity": 1,
+    "startYear": 2021,
+    "maker": "Apple",
+    "color": "black",
+    "camQuant": "3",
+    "popular": false
+  },
+  {
+    "name": "Apple iphone 11",
+    "urlImg": "../src/img/product/apple_iphone_11_pro.jpg",
+    "quantity": 138,
+    "startYear": 2020,
+    "maker": "Apple",
+    "color": "green",
+    "camQuant": "2",
+    "popular": true
+  },
+
+  {
+    "name": "Apple iphone 12",
+    "urlImg": "../src/img/product/samsung1.png",
+    "quantity": 1,
+    "startYear": 2021,
+    "maker": "Apple",
+    "color": "black",
+    "camQuant": "3",
+    "popular": false
+  },
+  {
+    "name": "Apple iphone 11",
+    "urlImg": "../src/img/product/apple_iphone_11_pro.jpg",
+    "quantity": 138,
+    "startYear": 2020,
+    "maker": "Apple",
+    "color": "green",
+    "camQuant": "2",
+    "popular": true
+  },
+
+  {
+    "name": "Apple iphone 12",
+    "urlImg": "../src/img/product/samsung1.png",
+    "quantity": 1,
+    "startYear": 2021,
+    "maker": "Apple",
+    "color": "black",
+    "camQuant": "3",
+    "popular": false
+  },
+  {
+    "name": "Apple iphone 11",
+    "urlImg": "../src/img/product/apple_iphone_11_pro.jpg",
+    "quantity": 138,
+    "startYear": 2020,
+    "maker": "Apple",
+    "color": "green",
+    "camQuant": "2",
+    "popular": true
+  },
+
+  {
+    "name": "Apple iphone 12",
+    "urlImg": "../src/img/product/samsung1.png",
+    "quantity": 1,
+    "startYear": 2021,
+    "maker": "Apple",
+    "color": "black",
+    "camQuant": "3",
+    "popular": false
+  },
+  {
+    "name": "Apple iphone 11",
+    "urlImg": "../src/img/product/apple_iphone_11_pro.jpg",
+    "quantity": 138,
+    "startYear": 2020,
+    "maker": "Apple",
+    "color": "green",
+    "camQuant": "2",
+    "popular": true
+  },
+
+  {
+    "name": "Apple iphone 12",
+    "urlImg": "../src/img/product/samsung1.png",
+    "quantity": 1,
+    "startYear": 2021,
+    "maker": "Apple",
+    "color": "black",
+    "camQuant": "3",
+    "popular": false
+  },
+  {
+    "name": "Apple iphone 11",
+    "urlImg": "../src/img/product/apple_iphone_11_pro.jpg",
+    "quantity": 138,
+    "startYear": 2020,
+    "maker": "Apple",
+    "color": "green",
+    "camQuant": "2",
+    "popular": true
+  },
+
+  {
+    "name": "Apple iphone 12",
+    "urlImg": "../src/img/product/samsung1.png",
+    "quantity": 1,
+    "startYear": 2021,
+    "maker": "Apple",
+    "color": "black",
+    "camQuant": "3",
+    "popular": false
+  },
+  {
+    "name": "Apple iphone 11",
+    "urlImg": "../src/img/product/apple_iphone_11_pro.jpg",
+    "quantity": 138,
+    "startYear": 2020,
+    "maker": "Apple",
+    "color": "green",
+    "camQuant": "2",
+    "popular": true
+  },
+
+  {
+    "name": "Apple iphone 12",
+    "urlImg": "../src/img/product/samsung1.png",
+    "quantity": 1,
+    "startYear": 2021,
+    "maker": "Apple",
+    "color": "black",
+    "camQuant": "3",
+    "popular": false
+  }
+]
